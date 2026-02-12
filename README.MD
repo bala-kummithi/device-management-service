@@ -11,10 +11,10 @@
 docker-compose up --build
 
 Statistics API:
-http://localhost:8080
+http://localhost:8092
 
 Device API:
-http://localhost:8081
+http://localhost:8091
 
 ## Kubernetes Deployment
 

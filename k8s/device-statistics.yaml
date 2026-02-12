@@ -37,5 +37,5 @@ spec:
     app: device-statistics-service
   ports:
     - port: 8092
-      targetPort: 808092
+      targetPort: 8092
       nodePort: 30007
