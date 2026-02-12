@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: device-statistics-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: device-statistics-service
+  template:
+    metadata:
+      labels:
+        app: device-statistics-service
+    spec:
+      containers:
+        - name: device-statistics-service
+          image: balakummithi/device-statistics-service:1.0
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgres:5432/postgres
+            - name: SPRING_DATASOURCE_USERNAME
+              value: postgres
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: admin
+            - name: DEVICE_API_URL
+              value: http://device-registration-service:8080
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: device-statistics-service
+spec:
+  type: NodePort  # public
+  selector:
+    app: device-statistics-service
+  ports:
+    - port: 8092
+      targetPort: 808092
+      nodePort: 30007

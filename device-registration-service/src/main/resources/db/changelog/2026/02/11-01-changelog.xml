@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.23.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1770848904491-5" author="user">
+        <createIndex indexName="idx_device_type" tableName="device_registrations">
+            <column name="device_type"/>
+        </createIndex>
+    </changeSet>
+    <changeSet id="1770848904491-1" author="user">
+        <modifyDataType columnName="device_type" newDataType="VARCHAR(255)" tableName="device_registrations"/>
+    </changeSet>
+    <changeSet id="1770848904491-2" author="user">
+        <dropColumn columnName="id" tableName="device_registrations"/>
+    </changeSet>
+    <changeSet id="1770848904491-3" author="user">
+        <addColumn tableName="device_registrations">
+            <column autoIncrement="true" incrementBy="1" name="id" startWith="1" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_device_registrations"
+                             validateNullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="1770848904491-4" author="user">
+        <modifyDataType columnName="user_key" newDataType="VARCHAR(255)" tableName="device_registrations"/>
+    </changeSet>
+
+</databaseChangeLog>

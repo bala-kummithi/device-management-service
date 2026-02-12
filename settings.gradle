@@ -1,0 +1,3 @@
+rootProject.name = 'device-management-service'
+include("device-registration-service")
+include("device-statistics-service")

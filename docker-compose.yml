@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  device-registration-service:
+    build: ./device-registration-service
+    image: balakummithi/device-registration-service:1.0
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
+    #ports:# No ports exposed → internal-only
+    #  - "8091:8091"
+
+  device-statistics-service:
+    build: ./device-statistics-service
+    image: balakummithi/device-statistics-service:1.0
+    depends_on:
+      - postgres
+      - device-registration-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
+      DEVICE_API_URL: http://device-registration-service:8091
+    ports:
+      - "8092:8092"
+
+volumes:
+  postgres_data:
