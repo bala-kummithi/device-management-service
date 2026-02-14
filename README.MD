@@ -11,7 +11,7 @@
 * Java Spring boot 4.x
 * Gradle 9.x
 * OpenJDK 17.x
-* PostgresSQL 15
+* PostgresSQL 15-alpine
 
 ## Run with Docker Compose
 
@@ -35,3 +35,11 @@ device-registration-service → Internal (ClusterIP)
 gradle clean build
 docker build -t balakummithi/device-statistics-service:1.0 device-statistics-service/
 docker build -t balakummithi/device-registration-service:1.0 device-registration-service/
+
+## Security Scanning
+
+Container images are scanned using Trivy.
+
+trivy image postgres:15-alpine
+
+No CRITICAL vulnerabilities found.
