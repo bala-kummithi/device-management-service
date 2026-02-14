@@ -17,11 +17,11 @@ spec:
           image: balakummithi/device-registration-service:1.0
           env:
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:postgresql://postgres:5432/postgres
+              value: jdbc:postgresql://postgres:5432/${POSTGRES_DB}
             - name: SPRING_DATASOURCE_USERNAME
-              value: postgres
+              value: ${POSTGRES_USER}
             - name: SPRING_DATASOURCE_PASSWORD
-              value: admin
+              value: ${POSTGRES_PASSWORD}
           ports:
             - containerPort: 8080
 ---

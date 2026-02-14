@@ -6,14 +6,21 @@
 - device-registration-service (internal)
 - PostgreSQL database
 
+# Tech Stack
+
+* Java Spring boot 4.x
+* Gradle 9.x
+* OpenJDK 17.x
+* PostgresSQL 15
+
 ## Run with Docker Compose
 
 docker-compose up --build
 
-Statistics API:
+Device Statistics API:
 http://localhost:8092
 
-Device API:
+Device Registration API:
 http://localhost:8091
 
 ## Kubernetes Deployment
@@ -25,6 +32,6 @@ device-registration-service → Internal (ClusterIP)
 
 ## Build Docker Images
 
-mvn clean package
-docker build -t balakummithi/device-statistics-service:1.0 device-registration-service/
+gradle clean build
+docker build -t balakummithi/device-statistics-service:1.0 device-statistics-service/
 docker build -t balakummithi/device-registration-service:1.0 device-registration-service/

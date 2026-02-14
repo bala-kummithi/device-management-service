@@ -40,9 +40,9 @@ spec:
           image: postgres:15
           env:
             - name: POSTGRES_DB
-              value: postgres
+              value: ${POSTGRES_DB}
             - name: POSTGRES_USER
-              value: postgres
+              value: ${POSTGRES_USER}
             - name: POSTGRES_PASSWORD
               value: ${POSTGRES_PASSWORD}
           ports:
