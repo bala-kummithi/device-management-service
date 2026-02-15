@@ -17,7 +17,7 @@ spec:
           image: balakummithi/device-statistics-service:1.0
           env:
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:postgresql://postgres:5432/${POSTGRES_DB}
+              value: jdbc:postgresql://postgres:5432/${POSTGRES_DB}?ssl=true&sslmode=require
             - name: SPRING_DATASOURCE_USERNAME
               value: ${POSTGRES_USER}
             - name: SPRING_DATASOURCE_PASSWORD

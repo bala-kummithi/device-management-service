@@ -14,6 +14,9 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./certs:/var/lib/postgresql/certs
+      - ./config/postgresql.conf:/etc/postgresql/postgresql.conf
+    command: [ "postgres", "-c", "config_file=/etc/postgresql/postgresql.conf" ]
 
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U $${POSTGRES_USER}" ]
@@ -27,7 +30,7 @@ services:
     depends_on:
       - postgres
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB}?ssl=true&sslmode=require
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
     #ports:# No ports exposed → internal-only
@@ -40,7 +43,7 @@ services:
       - postgres
       - device-registration-service
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB}?ssl=true&sslmode=require
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
       DEVICE_API_URL: http://device-registration-service:8091

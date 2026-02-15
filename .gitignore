@@ -16,7 +16,11 @@ build/
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
+# secrets
 .env
+# certificates
+certs/server.key
+certs/*.key
 
 ### IntelliJ IDEA ###
 .idea
