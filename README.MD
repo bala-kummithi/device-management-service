@@ -13,6 +13,16 @@
 * OpenJDK 17.x
 * PostgresSQL 15-alpine
 
+# Pre-requisites
+
+Generate Certificate and private key as postgressql connection secured with ssl:
+
+openssl req -new -x509 -days 365 -nodes
+
+-out server.crt -keyout server.key
+
+-subj "/CN=localhost"
+
 ## Run with Docker Compose
 
 docker-compose up --build
@@ -43,13 +53,3 @@ Container images are scanned using Trivy.
 trivy image postgres:15-alpine
 
 No CRITICAL vulnerabilities found.
-
-# Generate Certificate and private key 
-
-Generate local development certificates:
-
-openssl req -new -x509 -days 365 -nodes
-
--out server.crt -keyout server.key
-
--subj "/CN=localhost"
