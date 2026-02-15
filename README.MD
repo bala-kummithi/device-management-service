@@ -43,3 +43,13 @@ Container images are scanned using Trivy.
 trivy image postgres:15-alpine
 
 No CRITICAL vulnerabilities found.
+
+# Generate Certificate and private key 
+
+Generate local development certificates:
+
+openssl req -new -x509 -days 365 -nodes
+
+-out server.crt -keyout server.key
+
+-subj "/CN=localhost"

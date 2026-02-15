@@ -21,6 +21,7 @@ bin/
 # certificates
 certs/server.key
 certs/*.key
+certs/*.crt
 
 ### IntelliJ IDEA ###
 .idea
